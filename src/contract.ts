@@ -61,10 +61,12 @@ export function handle(
   }
 
   if (input.function === "balance") {
+    let target;
     if (!input.target) {
-      throw new ContractError(`Missing target.`);
+      target = caller;
+    } else {
+      target = input.target;
     }
-    const target = input.target;
     const ticker = state.ticker;
 
     if (typeof target !== "string") {
